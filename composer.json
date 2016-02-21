@@ -1,0 +1,40 @@
+{
+  "name": "nox-it/yii2-nox-mvc",
+  "description": "Yii2 NOX MVC",
+  "type": "library",
+  "keywords": [
+    "yii2",
+    "extension",
+    "mvc",
+    "framework",
+    "php"
+  ],
+  "license": "Apache-2.0",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Jonatas Sas",
+      "email": "atendimento@jsas.com.br"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "yiisoft/yii2": "2.*",
+    "nox-it/yii2-nox": "1.*",
+    "php": ">=5.4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "nox\\": "/"
+    }
+  },
+  "config": {
+    "process-timeout": 1800
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/nox-it/yii2-nox-mvc"
+    }
+  ]
+}
