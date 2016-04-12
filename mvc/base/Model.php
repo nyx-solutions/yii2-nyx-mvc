@@ -5,10 +5,11 @@
     /**
      * Class Model
      *
-     * @package nox\mvc
+     * @package nox\mvc\base
      */
     class Model extends \yii\base\Model
     {
+        #region Constants
         #region Custom Listings
         #region Yes/No
         const YES                    = 1;
@@ -85,14 +86,63 @@
         const YEAR_2031              = 2031;
         const YEAR_2032              = 2032;
         #endregion
+
+        #region States
+        const STATE_AC = 'AC';
+        const STATE_AL = 'AL';
+        const STATE_AP = 'AP';
+        const STATE_AM = 'AM';
+        const STATE_BA = 'BA';
+        const STATE_CE = 'CE';
+        const STATE_DF = 'DF';
+        const STATE_ES = 'ES';
+        const STATE_GO = 'GO';
+        const STATE_MA = 'MA';
+        const STATE_MT = 'MT';
+        const STATE_MS = 'MS';
+        const STATE_MG = 'MG';
+        const STATE_PA = 'PA';
+        const STATE_PB = 'PB';
+        const STATE_PR = 'PR';
+        const STATE_PE = 'PE';
+        const STATE_PI = 'PI';
+        const STATE_RJ = 'RJ';
+        const STATE_RN = 'RN';
+        const STATE_RS = 'RS';
+        const STATE_RO = 'RO';
+        const STATE_RR = 'RR';
+        const STATE_SC = 'SC';
+        const STATE_SP = 'SP';
+        const STATE_SE = 'SE';
+        const STATE_TO = 'TO';
         #endregion
+        #endregion
+
+        #region Listings
+        const LISTING_METHOD_DEFAULT = 1;
+        const LISTING_METHOD_AJAX    = 2;
+        const LISTING_METHOD_SIMPLE  = self::LISTING_METHOD_AJAX;
+        #endregion
+
+        #region Scenarios
+        const SCENARIO_INSERT      = 'insert';
+        const SCENARIO_UPDATE      = 'update';
+        const SCENARIO_REST_INSERT = 'rest-insert';
+        const SCENARIO_REST_UPDATE = 'rest-update';
+        #endregion
+        #endregion
+
+        /**
+         * @var array
+         */
+        protected static $fields = [];
 
         /**
          * @var bool
          */
         protected $isSearch = false;
 
-        #region Public Methods
+        #region Attributes Labels
         /**
          * Gets an attribute label
          *
@@ -103,6 +153,16 @@
         public function getAttributeLabel($attribute)
         {
             return parent::getAttributeLabel($attribute);
+        }
+        #endregion
+
+        #region Getters and Setters
+        /**
+         * @inheritdoc
+         */
+        public function fields()
+        {
+            return static::$fields;
         }
         #endregion
 
@@ -118,11 +178,11 @@
         public static function getStatusById($id)
         {
             switch ((int)$id) {
-                case static::STATUS_INACTIVE: {
+                case self::STATUS_INACTIVE: {
                     return 'Inativo';
                 }
 
-                case static::STATUS_ACTIVE: {
+                case self::STATUS_ACTIVE: {
                     return 'Ativo';
                 }
 
@@ -142,11 +202,11 @@
         public static function getFormatedStatusById($id)
         {
             switch ((int)$id) {
-                case static::STATUS_INACTIVE: {
+                case self::STATUS_INACTIVE: {
                     return '<span class="text-danger"><strong>Inativo</strong></span>';
                 }
 
-                case static::STATUS_ACTIVE: {
+                case self::STATUS_ACTIVE: {
                     return '<span class="text-success"><strong>Ativo</strong></span>';
                 }
 
@@ -164,8 +224,8 @@
         public static function getStatusList()
         {
             return [
-                static::STATUS_INACTIVE => static::getStatusById(static::STATUS_INACTIVE),
-                static::STATUS_ACTIVE   => static::getStatusById(static::STATUS_ACTIVE)
+                self::STATUS_INACTIVE => self::getStatusById(self::STATUS_INACTIVE),
+                self::STATUS_ACTIVE   => self::getStatusById(self::STATUS_ACTIVE)
             ];
         }
 
@@ -174,7 +234,7 @@
          */
         public static function getStatusRange()
         {
-            $items = static::getStatusList();
+            $items = self::getStatusList();
             $range = [];
 
             foreach ($items as $key => $value) {
@@ -194,11 +254,11 @@
         public static function getYesNoById($id)
         {
             switch ((int)$id) {
-                case static::YES: {
+                case self::YES: {
                     return 'Sim';
                 }
 
-                case static::NO: {
+                case self::NO: {
                     return 'Não';
                 }
 
@@ -216,11 +276,11 @@
         public static function getFormatedYesNoById($id)
         {
             switch ((int)$id) {
-                case static::YES: {
+                case self::YES: {
                     return '<span class="label label-sm label-success">Sim</span>';
                 }
 
-                case static::NO: {
+                case self::NO: {
                     return '<span class="label label-sm label-danger">Não</span>';
                 }
 
@@ -236,8 +296,8 @@
         public static function getYesNoList()
         {
             return [
-                static::YES => static::getYesNoById(static::YES),
-                static::NO  => static::getYesNoById(static::NO)
+                self::YES => self::getYesNoById(self::YES),
+                self::NO  => self::getYesNoById(self::NO)
             ];
         }
 
@@ -246,7 +306,7 @@
          */
         public static function getYesNoRange()
         {
-            $items = static::getYesNoList();
+            $items = self::getYesNoList();
             $range = [];
 
             foreach ($items as $key => $value) {
@@ -266,11 +326,11 @@
         public static function getGenderById($id)
         {
             switch (strtoupper((string)$id)) {
-                case static::GENDER_MALE: {
+                case self::GENDER_MALE: {
                     return 'Masculino';
                 }
 
-                case static::GENDER_FEMALE: {
+                case self::GENDER_FEMALE: {
                     return 'Feminino';
                 }
 
@@ -288,8 +348,8 @@
         public static function getGenderList()
         {
             return [
-                static::GENDER_MALE   => static::getGenderById(static::GENDER_MALE),
-                static::GENDER_FEMALE => static::getGenderById(static::GENDER_FEMALE)
+                self::GENDER_MALE   => self::getGenderById(self::GENDER_MALE),
+                self::GENDER_FEMALE => self::getGenderById(self::GENDER_FEMALE)
             ];
         }
 
@@ -298,7 +358,7 @@
          */
         public static function getGenderRange()
         {
-            $items = static::getGenderList();
+            $items = self::getGenderList();
             $range = [];
 
             foreach ($items as $key => $value) {
@@ -318,31 +378,31 @@
         public static function getWeekdayById($id)
         {
             switch ((int)$id) {
-                case static::WEEKDAY_SUNDAY: {
+                case self::WEEKDAY_SUNDAY: {
                     return 'Domingo';
                 }
 
-                case static::WEEKDAY_MONDAY: {
+                case self::WEEKDAY_MONDAY: {
                     return 'Segunda-feira';
                 }
 
-                case static::WEEKDAY_TUESDAY: {
+                case self::WEEKDAY_TUESDAY: {
                     return 'Terça-feira';
                 }
 
-                case static::WEEKDAY_WEDNESDAY: {
+                case self::WEEKDAY_WEDNESDAY: {
                     return 'Quarta-feira';
                 }
 
-                case static::WEEKDAY_THURSDAY: {
+                case self::WEEKDAY_THURSDAY: {
                     return 'Quinta-feira';
                 }
 
-                case static::WEEKDAY_FRIDAY: {
+                case self::WEEKDAY_FRIDAY: {
                     return 'Sexta-feira';
                 }
 
-                case static::WEEKDAY_SATURDAY: {
+                case self::WEEKDAY_SATURDAY: {
                     return 'Sábado';
                 }
 
@@ -360,31 +420,31 @@
         public static function getWeekdayAbbrById($id)
         {
             switch ((int)$id) {
-                case static::WEEKDAY_SUNDAY: {
+                case self::WEEKDAY_SUNDAY: {
                     return 'Dom';
                 }
 
-                case static::WEEKDAY_MONDAY: {
+                case self::WEEKDAY_MONDAY: {
                     return 'Seg';
                 }
 
-                case static::WEEKDAY_TUESDAY: {
+                case self::WEEKDAY_TUESDAY: {
                     return 'Ter';
                 }
 
-                case static::WEEKDAY_WEDNESDAY: {
+                case self::WEEKDAY_WEDNESDAY: {
                     return 'Qua';
                 }
 
-                case static::WEEKDAY_THURSDAY: {
+                case self::WEEKDAY_THURSDAY: {
                     return 'Qui';
                 }
 
-                case static::WEEKDAY_FRIDAY: {
+                case self::WEEKDAY_FRIDAY: {
                     return 'Sex';
                 }
 
-                case static::WEEKDAY_SATURDAY: {
+                case self::WEEKDAY_SATURDAY: {
                     return 'Sáb';
                 }
 
@@ -400,13 +460,13 @@
         public static function getWeekdayList()
         {
             return [
-                static::WEEKDAY_SUNDAY    => static::getWeekdayById(static::WEEKDAY_SUNDAY),
-                static::WEEKDAY_MONDAY    => static::getWeekdayById(static::WEEKDAY_MONDAY),
-                static::WEEKDAY_TUESDAY   => static::getWeekdayById(static::WEEKDAY_TUESDAY),
-                static::WEEKDAY_WEDNESDAY => static::getWeekdayById(static::WEEKDAY_WEDNESDAY),
-                static::WEEKDAY_THURSDAY  => static::getWeekdayById(static::WEEKDAY_THURSDAY),
-                static::WEEKDAY_FRIDAY    => static::getWeekdayById(static::WEEKDAY_FRIDAY),
-                static::WEEKDAY_SATURDAY  => static::getWeekdayById(static::WEEKDAY_SATURDAY)
+                self::WEEKDAY_SUNDAY    => self::getWeekdayById(self::WEEKDAY_SUNDAY),
+                self::WEEKDAY_MONDAY    => self::getWeekdayById(self::WEEKDAY_MONDAY),
+                self::WEEKDAY_TUESDAY   => self::getWeekdayById(self::WEEKDAY_TUESDAY),
+                self::WEEKDAY_WEDNESDAY => self::getWeekdayById(self::WEEKDAY_WEDNESDAY),
+                self::WEEKDAY_THURSDAY  => self::getWeekdayById(self::WEEKDAY_THURSDAY),
+                self::WEEKDAY_FRIDAY    => self::getWeekdayById(self::WEEKDAY_FRIDAY),
+                self::WEEKDAY_SATURDAY  => self::getWeekdayById(self::WEEKDAY_SATURDAY)
             ];
         }
 
@@ -415,7 +475,7 @@
          */
         public static function getWeekdayRange()
         {
-            $items = static::getWeekdayList();
+            $items = self::getWeekdayList();
             $range = [];
 
             foreach ($items as $key => $value) {
@@ -443,51 +503,51 @@
         public static function getMonthById($id)
         {
             switch ((int)$id) {
-                case static::MONTH_JANUARY: {
+                case self::MONTH_JANUARY: {
                     return 'Janeiro';
                 }
 
-                case static::MONTH_FEBRUARY: {
+                case self::MONTH_FEBRUARY: {
                     return 'Fevereiro';
                 }
 
-                case static::MONTH_MARCH: {
+                case self::MONTH_MARCH: {
                     return 'Março';
                 }
 
-                case static::MONTH_APRIL: {
+                case self::MONTH_APRIL: {
                     return 'Abril';
                 }
 
-                case static::MONTH_MAY: {
+                case self::MONTH_MAY: {
                     return 'Maio';
                 }
 
-                case static::MONTH_JUNE: {
+                case self::MONTH_JUNE: {
                     return 'Junho';
                 }
 
-                case static::MONTH_JULY: {
+                case self::MONTH_JULY: {
                     return 'Julho';
                 }
 
-                case static::MONTH_AUGUST: {
+                case self::MONTH_AUGUST: {
                     return 'Agosto';
                 }
 
-                case static::MONTH_SEPTEMBER: {
+                case self::MONTH_SEPTEMBER: {
                     return 'Setembro';
                 }
 
-                case static::MONTH_OCTOBER: {
+                case self::MONTH_OCTOBER: {
                     return 'Outubro';
                 }
 
-                case static::MONTH_NOVEMBER: {
+                case self::MONTH_NOVEMBER: {
                     return 'Novembro';
                 }
 
-                case static::MONTH_DECEMBER: {
+                case self::MONTH_DECEMBER: {
                     return 'Dezembro';
                 }
 
@@ -505,51 +565,51 @@
         public static function getMonthAbbrById($id)
         {
             switch ((int)$id) {
-                case static::MONTH_JANUARY: {
+                case self::MONTH_JANUARY: {
                     return 'Jan';
                 }
 
-                case static::MONTH_FEBRUARY: {
+                case self::MONTH_FEBRUARY: {
                     return 'Fev';
                 }
 
-                case static::MONTH_MARCH: {
+                case self::MONTH_MARCH: {
                     return 'Mar';
                 }
 
-                case static::MONTH_APRIL: {
+                case self::MONTH_APRIL: {
                     return 'Abr';
                 }
 
-                case static::MONTH_MAY: {
+                case self::MONTH_MAY: {
                     return 'Mai';
                 }
 
-                case static::MONTH_JUNE: {
+                case self::MONTH_JUNE: {
                     return 'Jun';
                 }
 
-                case static::MONTH_JULY: {
+                case self::MONTH_JULY: {
                     return 'Jul';
                 }
 
-                case static::MONTH_AUGUST: {
+                case self::MONTH_AUGUST: {
                     return 'Ago';
                 }
 
-                case static::MONTH_SEPTEMBER: {
+                case self::MONTH_SEPTEMBER: {
                     return 'Set';
                 }
 
-                case static::MONTH_OCTOBER: {
+                case self::MONTH_OCTOBER: {
                     return 'Out';
                 }
 
-                case static::MONTH_NOVEMBER: {
+                case self::MONTH_NOVEMBER: {
                     return 'Nov';
                 }
 
-                case static::MONTH_DECEMBER: {
+                case self::MONTH_DECEMBER: {
                     return 'Dez';
                 }
 
@@ -565,18 +625,18 @@
         public static function getMonthList()
         {
             return [
-                static::MONTH_JANUARY   => static::getMonthById(static::MONTH_JANUARY),
-                static::MONTH_FEBRUARY  => static::getMonthById(static::MONTH_FEBRUARY),
-                static::MONTH_MARCH     => static::getMonthById(static::MONTH_MARCH),
-                static::MONTH_APRIL     => static::getMonthById(static::MONTH_APRIL),
-                static::MONTH_MAY       => static::getMonthById(static::MONTH_MAY),
-                static::MONTH_JUNE      => static::getMonthById(static::MONTH_JUNE),
-                static::MONTH_JULY      => static::getMonthById(static::MONTH_JULY),
-                static::MONTH_AUGUST    => static::getMonthById(static::MONTH_AUGUST),
-                static::MONTH_SEPTEMBER => static::getMonthById(static::MONTH_SEPTEMBER),
-                static::MONTH_OCTOBER   => static::getMonthById(static::MONTH_OCTOBER),
-                static::MONTH_NOVEMBER  => static::getMonthById(static::MONTH_NOVEMBER),
-                static::MONTH_DECEMBER  => static::getMonthById(static::MONTH_DECEMBER)
+                self::MONTH_JANUARY   => self::getMonthById(self::MONTH_JANUARY),
+                self::MONTH_FEBRUARY  => self::getMonthById(self::MONTH_FEBRUARY),
+                self::MONTH_MARCH     => self::getMonthById(self::MONTH_MARCH),
+                self::MONTH_APRIL     => self::getMonthById(self::MONTH_APRIL),
+                self::MONTH_MAY       => self::getMonthById(self::MONTH_MAY),
+                self::MONTH_JUNE      => self::getMonthById(self::MONTH_JUNE),
+                self::MONTH_JULY      => self::getMonthById(self::MONTH_JULY),
+                self::MONTH_AUGUST    => self::getMonthById(self::MONTH_AUGUST),
+                self::MONTH_SEPTEMBER => self::getMonthById(self::MONTH_SEPTEMBER),
+                self::MONTH_OCTOBER   => self::getMonthById(self::MONTH_OCTOBER),
+                self::MONTH_NOVEMBER  => self::getMonthById(self::MONTH_NOVEMBER),
+                self::MONTH_DECEMBER  => self::getMonthById(self::MONTH_DECEMBER)
             ];
         }
 
@@ -585,7 +645,7 @@
          */
         public static function getMonthRange()
         {
-            $items = static::getMonthList();
+            $items = self::getMonthList();
             $range = [];
 
             foreach ($items as $key => $value) {
@@ -613,135 +673,135 @@
         public static function getYearById($id)
         {
             switch ((int)$id) {
-                case static::YEAR_2000: {
+                case self::YEAR_2000: {
                     return '2000';
                 }
 
-                case static::YEAR_2001: {
+                case self::YEAR_2001: {
                     return '2001';
                 }
 
-                case static::YEAR_2002: {
+                case self::YEAR_2002: {
                     return '2002';
                 }
 
-                case static::YEAR_2003: {
+                case self::YEAR_2003: {
                     return '2003';
                 }
 
-                case static::YEAR_2004: {
+                case self::YEAR_2004: {
                     return '2004';
                 }
 
-                case static::YEAR_2005: {
+                case self::YEAR_2005: {
                     return '2005';
                 }
 
-                case static::YEAR_2006: {
+                case self::YEAR_2006: {
                     return '2006';
                 }
 
-                case static::YEAR_2007: {
+                case self::YEAR_2007: {
                     return '2007';
                 }
 
-                case static::YEAR_2008: {
+                case self::YEAR_2008: {
                     return '2008';
                 }
 
-                case static::YEAR_2009: {
+                case self::YEAR_2009: {
                     return '2009';
                 }
 
-                case static::YEAR_2010: {
+                case self::YEAR_2010: {
                     return '2010';
                 }
 
-                case static::YEAR_2011: {
+                case self::YEAR_2011: {
                     return '2011';
                 }
 
-                case static::YEAR_2012: {
+                case self::YEAR_2012: {
                     return '2012';
                 }
 
-                case static::YEAR_2013: {
+                case self::YEAR_2013: {
                     return '2013';
                 }
 
-                case static::YEAR_2014: {
+                case self::YEAR_2014: {
                     return '2014';
                 }
 
-                case static::YEAR_2015: {
+                case self::YEAR_2015: {
                     return '2015';
                 }
 
-                case static::YEAR_2016: {
+                case self::YEAR_2016: {
                     return '2016';
                 }
 
-                case static::YEAR_2017: {
+                case self::YEAR_2017: {
                     return '2017';
                 }
 
-                case static::YEAR_2018: {
+                case self::YEAR_2018: {
                     return '2018';
                 }
 
-                case static::YEAR_2019: {
+                case self::YEAR_2019: {
                     return '2019';
                 }
 
-                case static::YEAR_2020: {
+                case self::YEAR_2020: {
                     return '2020';
                 }
 
-                case static::YEAR_2021: {
+                case self::YEAR_2021: {
                     return '2021';
                 }
 
-                case static::YEAR_2022: {
+                case self::YEAR_2022: {
                     return '2022';
                 }
 
-                case static::YEAR_2023: {
+                case self::YEAR_2023: {
                     return '2023';
                 }
 
-                case static::YEAR_2024: {
+                case self::YEAR_2024: {
                     return '2024';
                 }
 
-                case static::YEAR_2025: {
+                case self::YEAR_2025: {
                     return '2025';
                 }
 
-                case static::YEAR_2026: {
+                case self::YEAR_2026: {
                     return '2026';
                 }
 
-                case static::YEAR_2027: {
+                case self::YEAR_2027: {
                     return '2027';
                 }
 
-                case static::YEAR_2028: {
+                case self::YEAR_2028: {
                     return '2028';
                 }
 
-                case static::YEAR_2029: {
+                case self::YEAR_2029: {
                     return '2029';
                 }
 
-                case static::YEAR_2030: {
+                case self::YEAR_2030: {
                     return '2030';
                 }
 
-                case static::YEAR_2031: {
+                case self::YEAR_2031: {
                     return '2031';
                 }
 
-                case static::YEAR_2032: {
+                case self::YEAR_2032: {
                     return '2032';
                 }
 
@@ -757,38 +817,38 @@
         public static function getYearList()
         {
             return [
-                static::YEAR_2000 => static::getYearById(static::YEAR_2000),
-                static::YEAR_2001 => static::getYearById(static::YEAR_2001),
-                static::YEAR_2002 => static::getYearById(static::YEAR_2002),
-                static::YEAR_2003 => static::getYearById(static::YEAR_2003),
-                static::YEAR_2004 => static::getYearById(static::YEAR_2004),
-                static::YEAR_2005 => static::getYearById(static::YEAR_2005),
-                static::YEAR_2006 => static::getYearById(static::YEAR_2006),
-                static::YEAR_2007 => static::getYearById(static::YEAR_2007),
-                static::YEAR_2008 => static::getYearById(static::YEAR_2008),
-                static::YEAR_2009 => static::getYearById(static::YEAR_2009),
-                static::YEAR_2010 => static::getYearById(static::YEAR_2010),
-                static::YEAR_2011 => static::getYearById(static::YEAR_2011),
-                static::YEAR_2012 => static::getYearById(static::YEAR_2012),
-                static::YEAR_2013 => static::getYearById(static::YEAR_2013),
-                static::YEAR_2014 => static::getYearById(static::YEAR_2014),
-                static::YEAR_2015 => static::getYearById(static::YEAR_2015),
-                static::YEAR_2016 => static::getYearById(static::YEAR_2016),
-                static::YEAR_2017 => static::getYearById(static::YEAR_2017),
-                static::YEAR_2018 => static::getYearById(static::YEAR_2018),
-                static::YEAR_2019 => static::getYearById(static::YEAR_2019),
-                static::YEAR_2020 => static::getYearById(static::YEAR_2020),
-                static::YEAR_2021 => static::getYearById(static::YEAR_2021),
-                static::YEAR_2022 => static::getYearById(static::YEAR_2022),
-                static::YEAR_2023 => static::getYearById(static::YEAR_2023),
-                static::YEAR_2024 => static::getYearById(static::YEAR_2024),
-                static::YEAR_2025 => static::getYearById(static::YEAR_2025),
-                static::YEAR_2026 => static::getYearById(static::YEAR_2026),
-                static::YEAR_2027 => static::getYearById(static::YEAR_2027),
-                static::YEAR_2028 => static::getYearById(static::YEAR_2028),
-                static::YEAR_2029 => static::getYearById(static::YEAR_2029),
-                static::YEAR_2030 => static::getYearById(static::YEAR_2030),
-                static::YEAR_2031 => static::getYearById(static::YEAR_2031)
+                self::YEAR_2000 => self::getYearById(self::YEAR_2000),
+                self::YEAR_2001 => self::getYearById(self::YEAR_2001),
+                self::YEAR_2002 => self::getYearById(self::YEAR_2002),
+                self::YEAR_2003 => self::getYearById(self::YEAR_2003),
+                self::YEAR_2004 => self::getYearById(self::YEAR_2004),
+                self::YEAR_2005 => self::getYearById(self::YEAR_2005),
+                self::YEAR_2006 => self::getYearById(self::YEAR_2006),
+                self::YEAR_2007 => self::getYearById(self::YEAR_2007),
+                self::YEAR_2008 => self::getYearById(self::YEAR_2008),
+                self::YEAR_2009 => self::getYearById(self::YEAR_2009),
+                self::YEAR_2010 => self::getYearById(self::YEAR_2010),
+                self::YEAR_2011 => self::getYearById(self::YEAR_2011),
+                self::YEAR_2012 => self::getYearById(self::YEAR_2012),
+                self::YEAR_2013 => self::getYearById(self::YEAR_2013),
+                self::YEAR_2014 => self::getYearById(self::YEAR_2014),
+                self::YEAR_2015 => self::getYearById(self::YEAR_2015),
+                self::YEAR_2016 => self::getYearById(self::YEAR_2016),
+                self::YEAR_2017 => self::getYearById(self::YEAR_2017),
+                self::YEAR_2018 => self::getYearById(self::YEAR_2018),
+                self::YEAR_2019 => self::getYearById(self::YEAR_2019),
+                self::YEAR_2020 => self::getYearById(self::YEAR_2020),
+                self::YEAR_2021 => self::getYearById(self::YEAR_2021),
+                self::YEAR_2022 => self::getYearById(self::YEAR_2022),
+                self::YEAR_2023 => self::getYearById(self::YEAR_2023),
+                self::YEAR_2024 => self::getYearById(self::YEAR_2024),
+                self::YEAR_2025 => self::getYearById(self::YEAR_2025),
+                self::YEAR_2026 => self::getYearById(self::YEAR_2026),
+                self::YEAR_2027 => self::getYearById(self::YEAR_2027),
+                self::YEAR_2028 => self::getYearById(self::YEAR_2028),
+                self::YEAR_2029 => self::getYearById(self::YEAR_2029),
+                self::YEAR_2030 => self::getYearById(self::YEAR_2030),
+                self::YEAR_2031 => self::getYearById(self::YEAR_2031)
             ];
         }
 
@@ -797,7 +857,7 @@
          */
         public static function getYearRange()
         {
-            $items = static::getYearList();
+            $items = self::getYearList();
             $range = [];
 
             foreach ($items as $key => $value) {
@@ -823,6 +883,185 @@
         public static function getDaysRange()
         {
             return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+        }
+        #endregion
+
+        #region States
+        /**
+         * Returns the State.
+         *
+         * @param string $id
+         *
+         * @return string
+         */
+        public static function getStateById($id)
+        {
+            switch (strtoupper((string)$id)) {
+                case self::STATE_AC: {
+                    return 'Acre';
+                }
+
+                case self::STATE_AL: {
+                    return 'Alagoas';
+                }
+
+                case self::STATE_AP: {
+                    return 'Amapá';
+                }
+
+                case self::STATE_AM: {
+                    return 'Amazonas';
+                }
+
+                case self::STATE_BA: {
+                    return 'Bahia';
+                }
+
+                case self::STATE_CE: {
+                    return 'Ceará';
+                }
+
+                case self::STATE_DF: {
+                    return 'Distrito Federal';
+                }
+
+                case self::STATE_ES: {
+                    return 'Espírito Santo';
+                }
+
+                case self::STATE_GO: {
+                    return 'Goiás';
+                }
+
+                case self::STATE_MA: {
+                    return 'Maranhão';
+                }
+
+                case self::STATE_MT: {
+                    return 'Mato Grosso';
+                }
+
+                case self::STATE_MS: {
+                    return 'Mato Grosso do Sul';
+                }
+
+                case self::STATE_MG: {
+                    return 'Minas Gerais';
+                }
+
+                case self::STATE_PA: {
+                    return 'Pará';
+                }
+
+                case self::STATE_PB: {
+                    return 'Paraíba';
+                }
+
+                case self::STATE_PR: {
+                    return 'Paraná';
+                }
+
+                case self::STATE_PE: {
+                    return 'Pernambuco';
+                }
+
+                case self::STATE_PI: {
+                    return 'Piauí';
+                }
+
+                case self::STATE_RJ: {
+                    return 'Rio de Janeiro';
+                }
+
+                case self::STATE_RN: {
+                    return 'Rio Grande do Norte';
+                }
+
+                case self::STATE_RS: {
+                    return 'Rio Grande do Sul';
+                }
+
+                case self::STATE_RO: {
+                    return 'Rondônia';
+                }
+
+                case self::STATE_RR: {
+                    return 'Roraima';
+                }
+
+                case self::STATE_SC: {
+                    return 'Santa Catarina';
+                }
+
+                case self::STATE_SP: {
+                    return 'São Paulo';
+                }
+
+                case self::STATE_SE: {
+                    return 'Sergipe';
+                }
+
+                case self::STATE_TO: {
+                    return 'Tocantins';
+                }
+
+                default: {
+                    return '';
+                }
+            }
+        }
+
+        /**
+         * Returns the Status listing
+         *
+         * @return array
+         */
+        public static function getStateList()
+        {
+            return [
+                self::STATE_AC => self::getStateById(self::STATE_AC),
+                self::STATE_AL => self::getStateById(self::STATE_AL),
+                self::STATE_AP => self::getStateById(self::STATE_AP),
+                self::STATE_AM => self::getStateById(self::STATE_AM),
+                self::STATE_BA => self::getStateById(self::STATE_BA),
+                self::STATE_CE => self::getStateById(self::STATE_CE),
+                self::STATE_DF => self::getStateById(self::STATE_DF),
+                self::STATE_ES => self::getStateById(self::STATE_ES),
+                self::STATE_GO => self::getStateById(self::STATE_GO),
+                self::STATE_MA => self::getStateById(self::STATE_MA),
+                self::STATE_MT => self::getStateById(self::STATE_MT),
+                self::STATE_MS => self::getStateById(self::STATE_MS),
+                self::STATE_MG => self::getStateById(self::STATE_MG),
+                self::STATE_PA => self::getStateById(self::STATE_PA),
+                self::STATE_PB => self::getStateById(self::STATE_PB),
+                self::STATE_PR => self::getStateById(self::STATE_PR),
+                self::STATE_PE => self::getStateById(self::STATE_PE),
+                self::STATE_PI => self::getStateById(self::STATE_PI),
+                self::STATE_RJ => self::getStateById(self::STATE_RJ),
+                self::STATE_RN => self::getStateById(self::STATE_RN),
+                self::STATE_RS => self::getStateById(self::STATE_RS),
+                self::STATE_RO => self::getStateById(self::STATE_RO),
+                self::STATE_RR => self::getStateById(self::STATE_RR),
+                self::STATE_SC => self::getStateById(self::STATE_SC),
+                self::STATE_SP => self::getStateById(self::STATE_SP),
+                self::STATE_SE => self::getStateById(self::STATE_SE),
+                self::STATE_TO => self::getStateById(self::STATE_TO),
+            ];
+        }
+
+        /**
+         * @return array
+         */
+        public static function getStateRange()
+        {
+            $items = self::getStateList();
+            $range = [];
+
+            foreach ($items as $key => $value) {
+                $range[] = $key;
+            }
+
+            return $range;
         }
         #endregion
         #endregion
