@@ -1085,16 +1085,21 @@
 
         #region Database Methods
         /**
-         * @param string $field
-         * 
+         * @param string      $field
+         * @param string|bool $tableAlias
+         *
          * @return string
          */
-        public static function getTableField($field)
+        public static function getTableField($field, $tableAlias = false)
         {
             $field = self::getEscapedField($field);
 
             if(static::tableName() !== ''){
-                return static::tableName().'.'.$field;
+                if ($tableAlias !== false) {
+                    return static::getEscapedField($tableAlias).'.'.$field;
+                } else {
+                    return static::tableName().'.'.$field;
+                }
             }else{
                 return $field;
             }
