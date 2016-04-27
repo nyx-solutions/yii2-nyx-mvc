@@ -1148,5 +1148,17 @@
 
             return $name;
         }
+
+        /**
+         * @param string $sourceField
+         * @param string $targetField
+         * @param string $type
+         *
+         * @return string
+         */
+        public static function getJoinRelation($sourceField, $targetField, $type = '=')
+        {
+            return $sourceField.' '.$type.' '.$targetField;
+        }
         #endregion
     }
