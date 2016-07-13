@@ -1162,6 +1162,18 @@
         }
         #endregion
 
+        #region Events
+        /**
+         * @inheritdoc
+         */
+        public function afterSave($insert, $changedAttributes)
+        {
+            parent::afterSave($insert, $changedAttributes);
+
+            $this->flushPropertyCache();
+        }
+        #endregion
+
         #region Properties Cache
         /**
          * @var array
