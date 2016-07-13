@@ -1161,4 +1161,76 @@
             return $sourceField.' '.$type.' '.$targetField;
         }
         #endregion
+
+        #region Properties Cache
+        /**
+         * @var array
+         */
+        private $_cachedProperties = [];
+
+        /**
+         * @param string $name
+         * @param mixed  $value
+         *
+         * @return mixed
+         */
+        public function addPropertyToCache($name, $value)
+        {
+            $this->_cachedProperties[$name] = $value;
+
+            return $this->_cachedProperties[$name];
+        }
+
+        /**
+         * @param string $name
+         *
+         * @return mixed|null
+         */
+        public function getPropertyFromCache($name)
+        {
+            if ($this->isPropertyCached($name)) {
+                return $this->_cachedProperties[$name];
+            }
+
+            return null;
+        }
+
+        /**
+         * @param string $name
+         *
+         * @return bool
+         */
+        public function removePropertyFromCache($name)
+        {
+            if (isset($this->_cachedProperties[$name])) {
+                unset($this->_cachedProperties[$name]);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /**
+         * @param string $name
+         *
+         * @return bool
+         */
+        public function isPropertyCached($name)
+        {
+            if (isset($this->_cachedProperties[$name])) {
+                return true;
+            }
+
+            return false;
+        }
+
+        /**
+         * @return void
+         */
+        public function flushPropertyCache()
+        {
+            $this->_cachedProperties = [];
+        }
+        #endregion
     }
