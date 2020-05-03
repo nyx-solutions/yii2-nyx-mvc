@@ -4,7 +4,7 @@
   "type": "library",
   "keywords": ["yii2", "extension", "mvc", "framework", "php"],
   "license": "BSD-3-Clause",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "authors": [
     {
       "name": "Jonatas Sas",
@@ -14,7 +14,7 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.4.0",
-    "nox-it/yii2-nox": "~1.0.0"
+    "nox-it/yii2-nox": "~2.0.0"
   },
   "autoload": {
     "psr-4": {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3623fc0b72871aa443ec2f7a7739b5e9",
+    "content-hash": "42e735845c16b4aa40bf763c0f42d2fd",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -190,21 +190,21 @@
         },
         {
             "name": "nox-it/yii2-nox",
-            "version": "1.0.8",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nox-it/yii2-nox.git",
-                "reference": "70ed65c83e5955ad25a5c4df4917fc52b25ccd7d"
+                "reference": "152898b41017ab62574254a35f928e696a2e57d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nox-it/yii2-nox/zipball/70ed65c83e5955ad25a5c4df4917fc52b25ccd7d",
-                "reference": "70ed65c83e5955ad25a5c4df4917fc52b25ccd7d",
+                "url": "https://api.github.com/repos/nox-it/yii2-nox/zipball/152898b41017ab62574254a35f928e696a2e57d7",
+                "reference": "152898b41017ab62574254a35f928e696a2e57d7",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "2.*"
+                "php": ">=7.4.0",
+                "yiisoft/yii2": "~2.0.34"
             },
             "type": "library",
             "autoload": {
@@ -229,7 +229,7 @@
                 "php",
                 "yii2"
             ],
-            "time": "2017-05-27T12:45:41+00:00"
+            "time": "2020-05-02T00:18:41+00:00"
         },
         {
             "name": "yiisoft/yii2",
