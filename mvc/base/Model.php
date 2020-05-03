@@ -1,5 +1,9 @@
 <?php
 
+    /**
+     * @noinspection PhpMissingFieldTypeInspection
+     */
+
     namespace nox\mvc\base;
 
     /**

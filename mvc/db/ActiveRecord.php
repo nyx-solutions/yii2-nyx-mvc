@@ -1,6 +1,12 @@
 <?php
 
+    /**
+     * @noinspection PhpMissingFieldTypeInspection
+     */
+
     namespace nox\mvc\db;
+
+    use Yii;
 
     /**
      * Class ActiveRecord
@@ -1142,7 +1148,7 @@
          */
         protected static function getEscapedField($name)
         {
-            if (!preg_match('/^(`).*(`)/', $name) && !empty($name) && \Yii::$app->db->driverName == 'mysql') {
+            if (!preg_match('/^(`).*(`)/', $name) && !empty($name) && Yii::$app->db->driverName == 'mysql') {
                 $name = '`'.$name.'`';
             }
 
