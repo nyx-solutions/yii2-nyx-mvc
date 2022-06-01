@@ -4,14 +4,14 @@
      * @noinspection PhpMissingFieldTypeInspection
      */
 
-    namespace nox\mvc\db;
+    namespace nyx\mvc\db;
 
     use Yii;
 
     /**
      * Class ActiveRecord
      *
-     * @package nox\mvc\db
+     * @package nyx\mvc\db
      */
     class ActiveRecord extends \yii\db\ActiveRecord
     {

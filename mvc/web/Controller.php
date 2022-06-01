@@ -1,11 +1,11 @@
 <?php
 
-    namespace nox\mvc\web;
+    namespace nyx\mvc\web;
 
     /**
      * Class Controller
      *
-     * @package nox\mvc
+     * @package nyx\mvc
      */
     class Controller extends \yii\web\Controller
     {

@@ -4,12 +4,12 @@
      * @noinspection PhpMissingFieldTypeInspection
      */
 
-    namespace nox\mvc\base;
+    namespace nyx\mvc\base;
 
     /**
      * Class Model
      *
-     * @package nox\mvc\base
+     * @package nyx\mvc\base
      */
     class Model extends \yii\base\Model
     {

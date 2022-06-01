@@ -1,11 +1,11 @@
 <?php
 
-    namespace nox\mvc\web;
+    namespace nyx\mvc\web;
 
     /**
      * Class View
      *
-     * @package nox\mvc
+     * @package nyx\mvc
      */
     class View extends \yii\web\View
     {
