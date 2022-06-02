@@ -1,7 +1,7 @@
-Yii PHP Framework Version 2 / NOX MVC
+Yii PHP Framework Version 2 / NYX MVC
 =====================================
 
-NOX MVC adds more functionality to the following YII2 MVC Classes: `\yii\base\Model`, `\yii\db\ActiveRecord`, `\yii\web\Controller` and `\yii\web\View`.
+NYX MVC adds more functionality to the following YII2 MVC Classes: `\yii\base\Model`, `\yii\db\ActiveRecord`, `\yii\web\Controller` and `\yii\web\View`.
 
 [![Latest Stable Version](https://poser.pugx.org/nyx-solutions/yii2-nyx-mvc/v/stable)](https://packagist.org/packages/nyx-solutions/yii2-nyx-mvc)
 [![Total Downloads](https://poser.pugx.org/nyx-solutions/yii2-nyx-mvc/downloads)](https://packagist.org/packages/nyx-solutions/yii2-nyx-mvc)
